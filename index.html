@@ -1,0 +1,62 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Todo: World</title>
+  <meta name="description" content="Vue Testing">
+  <meta name="author" content="Matt Coles">
+
+  <link rel="stylesheet" href="node_modules/bulma/css/bulma.css">
+  <script src="https://use.fontawesome.com/6d0f3f7f5a.js"></script>
+
+</head>
+
+<body>
+  <section class="section" style="min-height:100vh">
+  <div id="app" class="container content">
+    <h3 class="title is-3"> {{ title }} </h3>
+    <p class="control has-addons has-icon">
+      <input v-model="newTodo" class="input is-expanded" type="text" placeholder="Insert a todo..." v-on:keyup.enter="add">
+      <a class="button is-success" v-on:click="add">
+        Submit
+      </a>
+      <i class="fa fa-list"></i>
+    </p>
+    <ol id="todo-list">
+      <li v-for="todo in todos" style="margin-bottom:5px">
+        <strong :style.sync="todo.style">{{ todo.text }}</strong>
+        <span class="is-pulled-right">
+        <button class="is-small is-danger button" v-on:click="remove($index)" style="text-align:center;">
+          <i class="fa fa-times"></i>
+        </button>
+        <button class="is-small is-success button" v-on:click="complete($index)" v-if="!todos[$index].complete" style="text-align:center;">
+          <i class="fa fa-check"></i>
+        </button>
+        <button class="is-small is-warning button" v-on:click="complete($index)" v-if="todos[$index].complete" style="text-align:center;">
+          <i class="fa fa-undo"></i>
+        </button>
+        <button class="is-small is-info button" v-if="$index == 0" style="text-align:center;visibility:hidden">
+          <i class="fa fa-arrow-up"></i>
+        </button>
+        <button class="is-small is-info button" v-if="$index > 0" v-on:click="up($index)" style="text-align:center">
+          <i class="fa fa-arrow-up"></i>
+        </button>
+        <button class="is-small is-info button" v-if="$index < todos.length-1" v-on:click="down($index)" style="text-align:center">
+          <i class="fa fa-arrow-down"></i>
+        </button>
+        <button class="is-small is-info button" v-if="$index == todos.length-1" style="text-align:center;visibility:hidden">
+          <i class="fa fa-arrow-down"></i>
+        </button>
+        </span>
+      </li>
+      <li class="is-disabled" v-if="newTodo">
+        {{ newTodo }}
+      </li>
+    </ol>
+  </div>
+  </section>
+  <script src="bundle.js"></script>
+</body>
+</html>
