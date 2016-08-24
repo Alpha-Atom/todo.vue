@@ -1,4 +1,4 @@
-var Vue = require('vue');;
+var Vue = require('vue')
 
 var existingTodos = localStorage.getItem('todos')
 
@@ -24,10 +24,10 @@ var app = new Vue({
     },
     complete: function (idx) {
       if (this.todos[idx].complete === false) {
-        this.$set('todos["'+ idx + '"]["style"]["text-decoration"]', 'line-through')
+        this.$set('todos["' + idx + '"]["style"]["text-decoration"]', 'line-through')
         this.$set('todos["' + idx + '"]["complete"]', true)
       } else {
-        this.$set('todos["'+ idx + '"]["style"]["text-decoration"]', 'none')
+        this.$set('todos["' + idx + '"]["style"]["text-decoration"]', 'none')
         this.$set('todos["' + idx + '"]["complete"]', false)
       }
       this.save()
